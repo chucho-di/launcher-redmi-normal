@@ -1,0 +1,19 @@
+name: Build APK Launcher Real
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build with Buildozer
+        uses: ArtemSBulgakov/buildozer-action@v1
+        id: buildozer
+        with:
+          command: buildozer android debug
+          buildozer_version: stable
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: APK-Launcher-Redmi-Normal
+          path: ./bin/*.apk
+          
